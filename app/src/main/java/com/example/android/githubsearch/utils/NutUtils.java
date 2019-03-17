@@ -30,6 +30,8 @@ public class NutUtils {
     private final static String NUT_SEARCH_APIKEY_PARAM = "api_key";
     private final static String NUT_SEARCH_APIKEY_VALUE = "GwQKRnpJWfjSPP9Gtp0mjGPuAuvVWpsmmkj9A2qv";
 
+    public final static String FOOD_BUNDLE_ID = "food_id";
+
     public static class FoodSearchResults {
         public FoodSearchResult list;
     }
@@ -76,6 +78,9 @@ public class NutUtils {
         Gson gson = new Gson();
         FoodSearchResults results = gson.fromJson(json, FoodSearchResults.class);
         if (results != null && results.list != null && results.list.item != null) {
+            for(Food food : results.list.item) {
+                food.name = food.name.substring(0,food.name.indexOf(", UPC"));
+            }
             return results.list.item;
         }
         else {
@@ -86,12 +91,22 @@ public class NutUtils {
     public static ArrayList<Nutrient> parseNutrientResults(String json) {
         Gson gson = new Gson();
         NutrientSearchResults results = gson.fromJson(json, NutrientSearchResults.class);
-        if (results != null
+        if(results != null
                 && results.foods != null
                 && !results.foods.isEmpty()
                 && !results.foods.get(0).food.isEmpty())
         {
-            return results.foods.get(0).food.get(0).nutrients;
+            ArrayList<Nutrient> listNut=new ArrayList<Nutrient>();
+            for(Nutrient nut : results.foods.get(0).food.get(0).nutrients) {
+                if(nut.name.equals("Sugars, total")
+                    || nut.name.equals("Energy")
+                    || nut.name.equals("Total lipid (fat)")
+                    || nut.name.equals("Carbohydrate, by difference"))
+                {
+                    listNut.add((nut));
+                }
+            }
+            return listNut;
         }
         else {
             return null;

@@ -7,31 +7,32 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.android.githubsearch.data.GitHubRepo;
+import com.example.android.githubsearch.data.Food;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class GitHubSearchAdapter extends RecyclerView.Adapter<GitHubSearchAdapter.SearchResultViewHolder> {
-    private List<GitHubRepo> mRepos;
+public class FoodSearchAdapter extends RecyclerView.Adapter<FoodSearchAdapter.SearchResultViewHolder> {
+    private ArrayList<Food> mFoods;
     OnSearchItemClickListener mSeachItemClickListener;
 
     public interface OnSearchItemClickListener {
-        void onSearchItemClick(GitHubRepo repo);
+        void onSearchItemClick(Food food);
     }
 
-    GitHubSearchAdapter(OnSearchItemClickListener searchItemClickListener) {
+    FoodSearchAdapter(OnSearchItemClickListener searchItemClickListener) {
         mSeachItemClickListener = searchItemClickListener;
     }
 
-    public void updateSearchResults(List<GitHubRepo> repos) {
-        mRepos = repos;
+    public void updateSearchResults(ArrayList<Food> foods) {
+        mFoods = foods;
         notifyDataSetChanged();
     }
 
     @Override
     public int getItemCount() {
-        if (mRepos != null) {
-            return mRepos.size();
+        if (mFoods != null) {
+            return mFoods.size();
         } else {
             return 0;
         }
@@ -47,7 +48,7 @@ public class GitHubSearchAdapter extends RecyclerView.Adapter<GitHubSearchAdapte
 
     @Override
     public void onBindViewHolder(@NonNull SearchResultViewHolder holder, int position) {
-        holder.bind(mRepos.get(position));
+        holder.bind(mFoods.get(position));
     }
 
     class SearchResultViewHolder extends RecyclerView.ViewHolder {
@@ -60,14 +61,14 @@ public class GitHubSearchAdapter extends RecyclerView.Adapter<GitHubSearchAdapte
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    GitHubRepo searchResult = mRepos.get(getAdapterPosition());
+                    Food searchResult = mFoods.get(getAdapterPosition());
                     mSeachItemClickListener.onSearchItemClick(searchResult);
                 }
             });
         }
 
-        public void bind(GitHubRepo repo) {
-            mSearchResultTV.setText(repo.full_name);
+        public void bind(Food food) {
+            mSearchResultTV.setText(food.name);
         }
     }
 }

@@ -18,5 +18,5 @@ public interface NutrientDao {
     void delete(Nutrient nutrient);
 
     @Query("SELECT * FROM nutrient WHERE ndbno = :ndbno")
-    LiveData<ArrayList<Nutrient>> getNutrientsByID(String ndbno);
+    LiveData<List<Nutrient>> getNutrientsByID(String ndbno);
 }

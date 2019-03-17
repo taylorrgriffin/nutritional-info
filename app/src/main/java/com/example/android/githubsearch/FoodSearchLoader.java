@@ -9,14 +9,14 @@ import com.example.android.githubsearch.utils.NetworkUtils;
 
 import java.io.IOException;
 
-public class GitHubSearchLoader extends AsyncTaskLoader<String> {
+public class FoodSearchLoader extends AsyncTaskLoader<String> {
 
-    private final static String TAG = GitHubSearchLoader.class.getSimpleName();
+    private final static String TAG = FoodSearchLoader.class.getSimpleName();
 
     private String mSearchResultsJSON;
     private String mURL;
 
-    GitHubSearchLoader(Context context, String url) {
+    FoodSearchLoader(Context context, String url) {
         super(context);
         mURL = url;
     }
@@ -37,7 +37,7 @@ public class GitHubSearchLoader extends AsyncTaskLoader<String> {
     @Override
     public String loadInBackground() {
         if (mURL != null) {
-            Log.d(TAG, "loading results from GitHub with URL: " + mURL);
+            Log.d(TAG, "loading results from Food with URL: " + mURL);
             String results = null;
             try {
                 results = NetworkUtils.doHTTPGet(mURL);

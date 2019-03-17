@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:textSize="24sp"
             android:layout_margin="4dp"
-            android:hint="@string/search_box_hint"/>
+            android:hint="Search Foods..."/>
 
         <Button
             android:id="@+id/btn_search"

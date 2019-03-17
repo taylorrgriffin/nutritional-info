@@ -9,38 +9,39 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.example.android.githubsearch.data.GitHubRepo;
-import com.example.android.githubsearch.utils.GitHubUtils;
+import com.example.android.githubsearch.data.Food;
+import com.example.android.githubsearch.utils.NutUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class SavedReposActivity extends AppCompatActivity implements GitHubSearchAdapter.OnSearchItemClickListener {
+public class SavedReposActivity extends AppCompatActivity implements FoodSearchAdapter.OnSearchItemClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_saved_search_results);
+        setContentView(R.layout.activity_saved_food_results);
 
-        RecyclerView savedReposRV = findViewById(R.id.rv_saved_repos);
-        savedReposRV.setLayoutManager(new LinearLayoutManager(this));
-        savedReposRV.setHasFixedSize(true);
+        RecyclerView savedFoodRV = findViewById(R.id.rv_saved_foods);
+        savedFoodRV.setLayoutManager(new LinearLayoutManager(this));
+        savedFoodRV.setHasFixedSize(true);
 
-        final GitHubSearchAdapter adapter = new GitHubSearchAdapter(this);
-        savedReposRV.setAdapter(adapter);
+        final FoodSearchAdapter adapter = new FoodSearchAdapter(this);
+        savedFoodRV.setAdapter(adapter);
 
-        GitHubRepoViewModel viewModel = ViewModelProviders.of(this).get(GitHubRepoViewModel.class);
-        viewModel.getAllGitHubRepos().observe(this, new Observer<List<GitHubRepo>>() {
+        FoodViewModel viewModel = ViewModelProviders.of(this).get(FoodViewModel.class);
+        viewModel.getAllFood().observe(this, new Observer<List<Food>>() {
             @Override
-            public void onChanged(@Nullable List<GitHubRepo> gitHubRepos) {
-                adapter.updateSearchResults(gitHubRepos);
+            public void onChanged(@Nullable List<Food> foods) {
+                adapter.updateSearchResults(new ArrayList<>(foods));
             }
         });
     }
 
     @Override
-    public void onSearchItemClick(GitHubRepo repo) {
-        Intent intent = new Intent(this, RepoDetailActivity.class);
-        intent.putExtra(GitHubUtils.EXTRA_GITHUB_REPO, repo);
+    public void onSearchItemClick(Food food) {
+        Intent intent = new Intent(this, FoodDetailActivity.class);
+        intent.putExtra(NutUtils.FOOD_BUNDLE_ID, food);
         startActivity(intent);
     }
 }

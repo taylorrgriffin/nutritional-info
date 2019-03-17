@@ -1,7 +1,6 @@
 package com.example.android.githubsearch;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -11,7 +10,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -25,20 +23,21 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.android.githubsearch.data.GitHubRepo;
-import com.example.android.githubsearch.utils.GitHubUtils;
+import com.example.android.githubsearch.data.Food;
+import com.example.android.githubsearch.utils.NutUtils;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
-        implements GitHubSearchAdapter.OnSearchItemClickListener, LoaderManager.LoaderCallbacks<String>,
+        implements FoodSearchAdapter.OnSearchItemClickListener, LoaderManager.LoaderCallbacks<String>,
             NavigationView.OnNavigationItemSelectedListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final String REPOS_ARRAY_KEY = "githubRepos";
-    private static final String SEARCH_URL_KEY = "githubSearchURL";
+    private static final String SEARCH_URL_KEY = "searchurlkey";
 
-    private static final int GITHUB_SEARCH_LOADER_ID = 0;
+
+    private static final int FOOD_SEARCH_LOADER_ID = 0;
 
     private RecyclerView mSearchResultsRV;
     private EditText mSearchBoxET;
@@ -46,8 +45,8 @@ public class MainActivity extends AppCompatActivity
     private ProgressBar mLoadingPB;
     private DrawerLayout mDrawerLayout;
 
-    private GitHubSearchAdapter mGitHubSearchAdapter;
-    private ArrayList<GitHubRepo> mRepos;
+    private FoodSearchAdapter mFoodSearchAdapter;
+    private ArrayList<Food> mFoods;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,15 +72,15 @@ public class MainActivity extends AppCompatActivity
         mSearchResultsRV.setLayoutManager(new LinearLayoutManager(this));
         mSearchResultsRV.setHasFixedSize(true);
 
-        mGitHubSearchAdapter = new GitHubSearchAdapter(this);
-        mSearchResultsRV.setAdapter(mGitHubSearchAdapter);
+        mFoodSearchAdapter = new FoodSearchAdapter(this);
+        mSearchResultsRV.setAdapter(mFoodSearchAdapter);
 
         if (savedInstanceState != null && savedInstanceState.containsKey(REPOS_ARRAY_KEY)) {
-            mRepos = (ArrayList<GitHubRepo>) savedInstanceState.getSerializable(REPOS_ARRAY_KEY);
-            mGitHubSearchAdapter.updateSearchResults(mRepos);
+            mFoods = (ArrayList<Food>) savedInstanceState.getSerializable(REPOS_ARRAY_KEY);
+            mFoodSearchAdapter.updateSearchResults(mFoods);
         }
 
-        getSupportLoaderManager().initLoader(GITHUB_SEARCH_LOADER_ID, null, this);
+        getSupportLoaderManager().initLoader(FOOD_SEARCH_LOADER_ID, null, this);
 
         Button searchButton = findViewById(R.id.btn_search);
         searchButton.setOnClickListener(new View.OnClickListener() {
@@ -89,7 +88,7 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View v) {
                 String searchQuery = mSearchBoxET.getText().toString();
                 if (!TextUtils.isEmpty(searchQuery)) {
-                    doGitHubSearch(searchQuery);
+                    doFoodSearch(searchQuery);
                 }
             }
         });
@@ -106,39 +105,27 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    private void doGitHubSearch(String query) {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String sort = preferences.getString(getString(R.string.pref_sort_key),
-                getString(R.string.pref_sort_default));
-        String language = preferences.getString(getString(R.string.pref_language_key),
-                getString(R.string.pref_language_default));
-        String user = preferences.getString(getString(R.string.pref_user_key),"");
-        boolean searchInName = preferences.getBoolean(getString(R.string.pref_in_name_key), true);
-        boolean searchInDescription = preferences.getBoolean(getString(R.string.pref_in_description_key), true);
-        boolean searchInReadme = preferences.getBoolean(getString(R.string.pref_in_readme_key), false);
-
-        String url = GitHubUtils.buildGitHubSearchURL(query, sort, language, user, searchInName,
-                searchInDescription, searchInReadme);
+    private void doFoodSearch(String query) {
+        String url = NutUtils.buildFoodSearchURL(query);
         Log.d(TAG, "querying search URL: " + url);
-
         Bundle args = new Bundle();
         args.putString(SEARCH_URL_KEY, url);
         mLoadingPB.setVisibility(View.VISIBLE);
-        getSupportLoaderManager().restartLoader(GITHUB_SEARCH_LOADER_ID, args, this);
+        getSupportLoaderManager().restartLoader(FOOD_SEARCH_LOADER_ID, args, this);
     }
 
     @Override
-    public void onSearchItemClick(GitHubRepo repo) {
-        Intent intent = new Intent(this, RepoDetailActivity.class);
-        intent.putExtra(GitHubUtils.EXTRA_GITHUB_REPO, repo);
+    public void onSearchItemClick(Food food) {
+        Intent intent = new Intent(this, FoodDetailActivity.class);
+        intent.putExtra(NutUtils.FOOD_BUNDLE_ID, food);
         startActivity(intent);
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        if (mRepos != null) {
-            outState.putSerializable(REPOS_ARRAY_KEY, mRepos);
+        if (mFoods != null) {
+            outState.putSerializable(REPOS_ARRAY_KEY, mFoods);
         }
     }
 
@@ -149,7 +136,7 @@ public class MainActivity extends AppCompatActivity
         if (bundle != null) {
             url = bundle.getString(SEARCH_URL_KEY);
         }
-        return new GitHubSearchLoader(this, url);
+        return new FoodSearchLoader(this, url);
     }
 
     @Override
@@ -158,8 +145,8 @@ public class MainActivity extends AppCompatActivity
         if (s != null) {
             mLoadingErrorTV.setVisibility(View.INVISIBLE);
             mSearchResultsRV.setVisibility(View.VISIBLE);
-            mRepos = GitHubUtils.parseGitHubSearchResults(s);
-            mGitHubSearchAdapter.updateSearchResults(mRepos);
+            mFoods = NutUtils.parseFoodResults(s);
+            mFoodSearchAdapter.updateSearchResults(mFoods);
         } else {
             mLoadingErrorTV.setVisibility(View.VISIBLE);
             mSearchResultsRV.setVisibility(View.INVISIBLE);
@@ -178,11 +165,7 @@ public class MainActivity extends AppCompatActivity
         switch (menuItem.getItemId()) {
             case R.id.nav_search:
                 return true;
-            case R.id.nav_settings:
-                Intent settingsIntent = new Intent(this, SettingsActivity.class);
-                startActivity(settingsIntent);
-                return true;
-            case R.id.nav_saved_repos:
+            case R.id.nav_saved_foods:
                 Intent savedReposIntent = new Intent(this, SavedReposActivity.class);
                 startActivity(savedReposIntent);
                 return true;

@@ -23,7 +23,7 @@ public class NutrientRepository {
         new DeleteAsyncTask(mNutrientDao).execute(nutrient);
     }
 
-    public LiveData<ArrayList<Nutrient>> getNutrientsByID(long ndbno) {
+    public LiveData<List<Nutrient>> getNutrientsByID(long ndbno) {
         return mNutrientDao.getNutrientsByID(Long.toString(ndbno));
     }
 

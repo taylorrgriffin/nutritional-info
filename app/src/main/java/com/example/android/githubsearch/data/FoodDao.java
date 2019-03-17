@@ -9,16 +9,16 @@ import android.arch.persistence.room.Query;
 import java.util.List;
 
 @Dao
-public interface GitHubRepoDao {
+public interface FoodDao {
     @Insert
-    void insert(GitHubRepo repo);
+    void insert(Food food);
 
     @Delete
-    void delete(GitHubRepo repo);
+    void delete(Food food);
 
-    @Query("SELECT * FROM repos")
-    LiveData<List<GitHubRepo>> getAllRepos();
+    @Query("SELECT * FROM food")
+    LiveData<List<Food>> getAllFood();
 
-    @Query("SELECT * FROM repos WHERE full_name = :fullName LIMIT 1")
-    LiveData<GitHubRepo> getRepoByName(String fullName);
+    @Query("SELECT * FROM food WHERE ndbno = :ndbno LIMIT 1")
+    LiveData<Food> getFoodByID(String ndbno);
 }

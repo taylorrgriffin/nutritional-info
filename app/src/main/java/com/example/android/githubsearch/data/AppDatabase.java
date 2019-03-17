@@ -5,7 +5,7 @@ import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
-@Database(entities = {GitHubRepo.class}, version = 1)
+@Database(entities = {Food.class,Nutrient.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
     private static volatile AppDatabase INSTANCE;
 
@@ -14,12 +14,13 @@ public abstract class AppDatabase extends RoomDatabase {
             synchronized (AppDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            AppDatabase.class, "github_repos_db").build();
+                            AppDatabase.class, "food_nut_db").build();
                 }
             }
         }
         return INSTANCE;
     }
 
-    public abstract GitHubRepoDao gitHubRepoDao();
+    public abstract FoodDao FoodDao();
+    public abstract NutrientDao NutrientDao();
 }

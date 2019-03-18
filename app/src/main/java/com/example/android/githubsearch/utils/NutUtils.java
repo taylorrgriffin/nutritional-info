@@ -45,7 +45,7 @@ public class NutUtils {
     }
 
     public static class NutrientSearchResult {
-        public ArrayList<NutrientSearchResultFood> food;
+        public NutrientSearchResultFood food;
     }
 
     public static class NutrientSearchResultFood {
@@ -79,7 +79,9 @@ public class NutUtils {
         FoodSearchResults results = gson.fromJson(json, FoodSearchResults.class);
         if (results != null && results.list != null && results.list.item != null) {
             for(Food food : results.list.item) {
-                food.name = food.name.substring(0,food.name.indexOf(", UPC"));
+                if (food.name.indexOf(", UPC") != -1) {
+                    food.name = food.name.substring(0,food.name.indexOf(", UPC"));
+                }
             }
             return results.list.item;
         }
@@ -94,10 +96,11 @@ public class NutUtils {
         if(results != null
                 && results.foods != null
                 && !results.foods.isEmpty()
-                && !results.foods.get(0).food.isEmpty())
+                && results.foods.get(0).food != null
+                && results.foods.get(0).food.nutrients != null)
         {
             ArrayList<Nutrient> listNut=new ArrayList<Nutrient>();
-            for(Nutrient nut : results.foods.get(0).food.get(0).nutrients) {
+            for(Nutrient nut : results.foods.get(0).food.nutrients) {
                 if(nut.name.equals("Sugars, total")
                     || nut.name.equals("Energy")
                     || nut.name.equals("Total lipid (fat)")

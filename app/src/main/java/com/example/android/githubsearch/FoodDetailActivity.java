@@ -191,19 +191,19 @@ public class FoodDetailActivity extends AppCompatActivity implements LoaderManag
         }
         for (Nutrient nut : nutrients) {
             if (nut.name.equals("Sugars, total")) {
-                mFoodSugarTV.setText("Sugar: "+nut.value+nut.unit);
+                mFoodSugarTV.setText(nut.value+" "+nut.unit);
             }
             else if (nut.name.equals("Energy")) {
-                mFoodEnergyTV.setText("Energy: "+nut.value+nut.unit);
+                mFoodEnergyTV.setText(nut.value+" "+nut.unit);
             }
             else if (nut.name.equals("Total lipid (fat)")) {
-                mFoodFatTV.setText("Fat: "+nut.value+nut.unit);
+                mFoodFatTV.setText(nut.value+" "+nut.unit);
             }
             else if (nut.name.equals("Carbohydrate, by difference")) {
-                mFoodCarbsTV.setText("Carbs: "+nut.value+nut.unit);
+                mFoodCarbsTV.setText(nut.value+" "+nut.unit);
             }
             else if (nut.name.equals("Protein")) {
-                mFoodProteinTV.setText("Protein: "+nut.value+nut.unit);
+                mFoodProteinTV.setText(nut.value+" "+nut.unit);
             }
         }
     }

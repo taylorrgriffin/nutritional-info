@@ -14,15 +14,21 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="24dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:padding="16dp"
+            android:background="#fff"
+            android:elevation="10dp"
+            android:layout_gravity="top">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:padding="16dp"
-                android:layout_gravity="center_vertical">
+                android:layout_marginBottom="16dp">
 
                 <ImageView
                     android:id="@+id/iv_repo_bookmark"
@@ -38,45 +44,80 @@
                     android:textColor="#000"/>
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/tv_food_energy"
+            <TableLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:textSize="14sp"
-                android:text="Energy: N/A"/>
+                android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/tv_food_sugar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:textSize="14sp"
-                android:text="Sugar: N/A"/>
+                <TableRow>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Energy:"/>
+                    <TextView
+                        android:id="@+id/tv_food_energy"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textSize="14sp"
+                        android:text="N/A"/>
+                </TableRow>
 
-            <TextView
-                android:id="@+id/tv_food_fat"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:textSize="14sp"
-                android:text="Fat: N/A"/>
+                <TableRow>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sugar:"/>
+                    <TextView
+                        android:id="@+id/tv_food_sugar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textSize="14sp"
+                        android:text="N/A"/>
+                </TableRow>
 
-            <TextView
-                android:id="@+id/tv_food_carbs"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:textSize="14sp"
-                android:text="Carbs: N/A"/>
+                <TableRow>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Fat:"/>
+                    <TextView
+                        android:id="@+id/tv_food_fat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textSize="14sp"
+                        android:text="N/A"/>
+                </TableRow>
 
-            <TextView
-                android:id="@+id/tv_food_protein"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:textSize="14sp"
-                android:text="Protein: N/A"/>
+                <TableRow>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Carbohydrates:"/>
+                    <TextView
+                        android:id="@+id/tv_food_carbs"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textSize="14sp"
+                        android:text="N/A"/>
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Protein:"/>
+                    <TextView
+                        android:id="@+id/tv_food_protein"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textSize="14sp"
+                        android:text="N/A"/>
+                </TableRow>
+            </TableLayout>
 
         </LinearLayout>
 

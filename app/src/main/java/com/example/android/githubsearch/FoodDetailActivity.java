@@ -36,6 +36,8 @@ public class FoodDetailActivity extends AppCompatActivity implements LoaderManag
     private TextView mFoodCarbsTV;
     private TextView mFoodSugarTV;
     private TextView mFoodFatTV;
+    private TextView mFoodProteinTV;
+
     private ImageView mFoodBookmarkIV;
     private TextView mLoadingErrorTV;
 
@@ -57,6 +59,8 @@ public class FoodDetailActivity extends AppCompatActivity implements LoaderManag
         mFoodSugarTV = findViewById(R.id.tv_food_sugar);
         mFoodFatTV = findViewById(R.id.tv_food_fat);
         mFoodCarbsTV = findViewById(R.id.tv_food_carbs);
+        mFoodProteinTV = findViewById(R.id.tv_food_protein);
+
         mLoadingErrorTV =  findViewById(R.id.tv_loading_error);
         mLoadingPB = findViewById(R.id.pb_loading);
 
@@ -198,26 +202,35 @@ public class FoodDetailActivity extends AppCompatActivity implements LoaderManag
             else if (nut.name.equals("Carbohydrate, by difference")) {
                 mFoodCarbsTV.setText("Carbs: "+nut.value+nut.unit);
             }
+            else if (nut.name.equals("Protein")) {
+                mFoodProteinTV.setText("Protein: "+nut.value+nut.unit);
+            }
         }
     }
 
     private void toggleVisibility(boolean isLoaded) {
         if (isLoaded) {
             mLoadingPB.setVisibility(View.INVISIBLE);
+
             mFoodNameTV.setVisibility(View.VISIBLE);
             mFoodEnergyTV.setVisibility(View.VISIBLE);
             mFoodCarbsTV.setVisibility(View.VISIBLE);
             mFoodSugarTV.setVisibility(View.VISIBLE);
             mFoodFatTV.setVisibility(View.VISIBLE);
+            mFoodProteinTV.setVisibility(View.VISIBLE);
+
             mFoodBookmarkIV.setVisibility(View.VISIBLE);
         }
         else {
             mLoadingPB.setVisibility(View.VISIBLE);
+
             mFoodNameTV.setVisibility(View.INVISIBLE);
             mFoodEnergyTV.setVisibility(View.INVISIBLE);
             mFoodCarbsTV.setVisibility(View.INVISIBLE);
             mFoodSugarTV.setVisibility(View.INVISIBLE);
             mFoodFatTV.setVisibility(View.INVISIBLE);
+            mFoodProteinTV.setVisibility(View.INVISIBLE);
+
             mFoodBookmarkIV.setVisibility(View.INVISIBLE);
         }
     }

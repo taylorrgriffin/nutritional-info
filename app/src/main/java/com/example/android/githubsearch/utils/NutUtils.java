@@ -104,7 +104,8 @@ public class NutUtils {
                 if(nut.name.equals("Sugars, total")
                     || nut.name.equals("Energy")
                     || nut.name.equals("Total lipid (fat)")
-                    || nut.name.equals("Carbohydrate, by difference"))
+                    || nut.name.equals("Carbohydrate, by difference")
+                    || nut.name.equals("Protein"))
                 {
                     listNut.add((nut));
                 }

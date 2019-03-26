@@ -70,6 +70,14 @@
                 android:textSize="14sp"
                 android:text="Carbs: N/A"/>
 
+            <TextView
+                android:id="@+id/tv_food_protein"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textSize="14sp"
+                android:text="Protein: N/A"/>
+
         </LinearLayout>
 
         <TextView

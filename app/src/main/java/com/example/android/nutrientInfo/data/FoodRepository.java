@@ -1,10 +1,9 @@
-package com.example.android.githubsearch.data;
+package com.example.android.nutrientInfo.data;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FoodRepository {
@@ -38,8 +37,8 @@ public class FoodRepository {
         }
 
         @Override
-        protected Void doInBackground(Food... gitHubRepos) {
-            mAsyncTaskDao.insert(gitHubRepos[0]);
+        protected Void doInBackground(Food... foods) {
+            mAsyncTaskDao.insert(foods[0]);
             return null;
         }
     }
@@ -51,8 +50,8 @@ public class FoodRepository {
         }
 
         @Override
-        protected Void doInBackground(Food... gitHubRepos) {
-            mAsyncTaskDao.delete(gitHubRepos[0]);
+        protected Void doInBackground(Food... savedFoods) {
+            mAsyncTaskDao.delete(savedFoods[0]);
             return null;
         }
     }

@@ -1,15 +1,14 @@
-package com.example.android.githubsearch;
+package com.example.android.nutrientInfo;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 
-import com.example.android.githubsearch.data.Food;
-import com.example.android.githubsearch.data.FoodRepository;
-import com.example.android.githubsearch.data.Nutrient;
-import com.example.android.githubsearch.data.NutrientRepository;
+import com.example.android.nutrientInfo.data.Food;
+import com.example.android.nutrientInfo.data.FoodRepository;
+import com.example.android.nutrientInfo.data.Nutrient;
+import com.example.android.nutrientInfo.data.NutrientRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FoodViewModel extends AndroidViewModel {

@@ -1,4 +1,4 @@
-package com.example.android.githubsearch;
+package com.example.android.nutrientInfo;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
@@ -18,9 +18,9 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.android.githubsearch.data.Food;
-import com.example.android.githubsearch.data.Nutrient;
-import com.example.android.githubsearch.utils.NutUtils;
+import com.example.android.nutrientInfo.data.Food;
+import com.example.android.nutrientInfo.data.Nutrient;
+import com.example.android.nutrientInfo.utils.NutUtils;
 
 import java.util.List;
 

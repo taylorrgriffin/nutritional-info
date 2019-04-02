@@ -1,11 +1,11 @@
-package com.example.android.githubsearch;
+package com.example.android.nutrientInfo;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.v4.content.AsyncTaskLoader;
 import android.util.Log;
 
-import com.example.android.githubsearch.utils.NetworkUtils;
+import com.example.android.nutrientInfo.utils.NetworkUtils;
 
 import java.io.IOException;
 

@@ -1,16 +1,15 @@
-package com.example.android.githubsearch.utils;
+package com.example.android.nutrientInfo.utils;
 
 import android.net.Uri;
-import android.support.annotation.Nullable;
-import android.text.TextUtils;
 
-import com.example.android.githubsearch.data.Food;
-import com.example.android.githubsearch.data.Nutrient;
+import com.example.android.nutrientInfo.data.Food;
+import com.example.android.nutrientInfo.data.Nutrient;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
 public class NutUtils {
+    // food search components
     private final static String NUT_SEARCHLIST_BASE_URL = "https://api.nal.usda.gov/ndb/search";
     private final static String NUT_SEARCHLIST_QUERY_PARAM = "q";
     private final static String NUT_SEARCHLIST_SORT_PARAM = "sort";
@@ -19,12 +18,12 @@ public class NutUtils {
     private final static String NUT_SEARCHLIST_MAX_VALUE = "25";
     private final static String NUT_SEARCHLIST_OFFSET_PARAM = "offset";
     private final static String NUT_SEARCHLIST_OFFSET_VALUE = "0";
-
+    // nutrient query components
     private final static String NUT_SEARCHDETAIL_BASE_URL = "https://api.nal.usda.gov/ndb/V2/reports";
     private final static String NUT_SEARCHDETAIl_ID_PARAM = "ndbno";
     private final static String NUT_SEARCHDETAIL_TYPE_PARAM = "type";
     private final static String NUT_SEARCHDETAIL_TYPE_VALUE = "b";
-
+    // general components
     private final static String NUT_SEARCH_FORMAT_PARAM = "format";
     private final static String NUT_SEARCH_FORMAT_VALUE = "json";
     private final static String NUT_SEARCH_APIKEY_PARAM = "api_key";
@@ -32,22 +31,19 @@ public class NutUtils {
 
     public final static String FOOD_BUNDLE_ID = "food_id";
 
+    // classes for json auto-mapping
     public static class FoodSearchResults {
         public FoodSearchResult list;
     }
-
     public static class FoodSearchResult {
         public ArrayList<Food> item;
     }
-
     public static class NutrientSearchResults {
         public ArrayList<NutrientSearchResult> foods;
     }
-
     public static class NutrientSearchResult {
         public NutrientSearchResultFood food;
     }
-
     public static class NutrientSearchResultFood {
         public ArrayList<Nutrient> nutrients;
     }

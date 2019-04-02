@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.android.githubsearch">
+    package="com.example.android.nutrientInfo">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -14,21 +14,21 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".SavedReposActivity"
-            android:parentActivityName=".MainActivity">
+            android:name="com.example.android.nutrientInfo.SavedFoodsActivity"
+            android:parentActivityName="com.example.android.nutrientInfo.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="com.example.android.nutrientInfo.MainActivity" />
         </activity>
         <activity
-            android:name=".FoodDetailActivity"
-            android:parentActivityName=".MainActivity">
+            android:name="com.example.android.nutrientInfo.FoodDetailActivity"
+            android:parentActivityName="com.example.android.nutrientInfo.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="com.example.android.nutrientInfo.MainActivity" />
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.android.nutrientInfo.MainActivity"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>

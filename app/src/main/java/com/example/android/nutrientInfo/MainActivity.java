@@ -1,4 +1,4 @@
-package com.example.android.githubsearch;
+package com.example.android.nutrientInfo;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -23,8 +23,8 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.android.githubsearch.data.Food;
-import com.example.android.githubsearch.utils.NutUtils;
+import com.example.android.nutrientInfo.data.Food;
+import com.example.android.nutrientInfo.utils.NutUtils;
 
 import java.util.ArrayList;
 
@@ -33,9 +33,8 @@ public class MainActivity extends AppCompatActivity
             NavigationView.OnNavigationItemSelectedListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
-    private static final String REPOS_ARRAY_KEY = "githubRepos";
+    private static final String FOODS_ARRAY_KEY = "foodResults";
     private static final String SEARCH_URL_KEY = "searchurlkey";
-
 
     private static final int FOOD_SEARCH_LOADER_ID = 0;
 
@@ -75,8 +74,8 @@ public class MainActivity extends AppCompatActivity
         mFoodSearchAdapter = new FoodSearchAdapter(this);
         mSearchResultsRV.setAdapter(mFoodSearchAdapter);
 
-        if (savedInstanceState != null && savedInstanceState.containsKey(REPOS_ARRAY_KEY)) {
-            mFoods = (ArrayList<Food>) savedInstanceState.getSerializable(REPOS_ARRAY_KEY);
+        if (savedInstanceState != null && savedInstanceState.containsKey(FOODS_ARRAY_KEY)) {
+            mFoods = (ArrayList<Food>) savedInstanceState.getSerializable(FOODS_ARRAY_KEY);
             mFoodSearchAdapter.updateSearchResults(mFoods);
         }
 
@@ -125,7 +124,7 @@ public class MainActivity extends AppCompatActivity
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         if (mFoods != null) {
-            outState.putSerializable(REPOS_ARRAY_KEY, mFoods);
+            outState.putSerializable(FOODS_ARRAY_KEY, mFoods);
         }
     }
 
@@ -166,8 +165,8 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_search:
                 return true;
             case R.id.nav_saved_foods:
-                Intent savedReposIntent = new Intent(this, SavedReposActivity.class);
-                startActivity(savedReposIntent);
+                Intent savedFoodsIntent = new Intent(this, SavedFoodsActivity.class);
+                startActivity(savedFoodsIntent);
                 return true;
             default:
                 return false;

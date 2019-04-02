@@ -1,4 +1,4 @@
-package com.example.android.githubsearch;
+package com.example.android.nutrientInfo;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
@@ -9,13 +9,13 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.example.android.githubsearch.data.Food;
-import com.example.android.githubsearch.utils.NutUtils;
+import com.example.android.nutrientInfo.data.Food;
+import com.example.android.nutrientInfo.utils.NutUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SavedReposActivity extends AppCompatActivity implements FoodSearchAdapter.OnSearchItemClickListener {
+public class SavedFoodsActivity extends AppCompatActivity implements FoodSearchAdapter.OnSearchItemClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

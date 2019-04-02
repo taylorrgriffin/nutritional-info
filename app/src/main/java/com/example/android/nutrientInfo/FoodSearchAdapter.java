@@ -1,4 +1,4 @@
-package com.example.android.githubsearch;
+package com.example.android.nutrientInfo;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -7,10 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.android.githubsearch.data.Food;
+import com.example.android.nutrientInfo.data.Food;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class FoodSearchAdapter extends RecyclerView.Adapter<FoodSearchAdapter.SearchResultViewHolder> {
     private ArrayList<Food> mFoods;

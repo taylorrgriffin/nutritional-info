@@ -1,4 +1,4 @@
-package com.example.android.githubsearch;
+package com.example.android.nutrientInfo;
 
 import org.junit.Test;
 

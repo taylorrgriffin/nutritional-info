@@ -6,11 +6,11 @@ import android.support.annotation.NonNull;
 
 import java.io.Serializable;
 
-@Entity(tableName = "nutrient")
+@Entity(tableName = "nutrient", primaryKeys= {"nutrient_id","ndbno"})
 public class Nutrient implements Serializable {
     @NonNull
-    @PrimaryKey
     public long nutrient_id;
+    @NonNull
     public long ndbno;
     public String name;
     public String unit;

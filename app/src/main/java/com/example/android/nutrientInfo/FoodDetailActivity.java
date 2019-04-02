@@ -113,6 +113,7 @@ public class FoodDetailActivity extends AppCompatActivity implements LoaderManag
                     if (!mIsSaved) {
                         mFoodViewModel.insertFood(mFood);
                         for (Nutrient nut : mNutrients) {
+                            nut.ndbno = mFood.ndbno;
                             mFoodViewModel.insertNutrient(nut);
                         }
                     }
